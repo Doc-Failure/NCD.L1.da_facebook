@@ -1,4 +1,4 @@
-import { context ,PersistentMap, u128,PersistentVector } from "near-sdk-core";
+import { context ,PersistentMap, u128,PersistentVector, PersistentUnorderedMap, Context } from "near-sdk-core";
 
 type AccountId = string;
 type Address = string;
@@ -76,3 +76,18 @@ type Address = string;
    
   export let Books = new PersistentVector<BookInformation>("Books")
   export let rateL = new PersistentMap<AccountId, u32>("rate")
+
+  /**
+ * A message left by someone saying thanks
+ */
+ @nearBindgen
+ export class Message {
+   //public static max_length(): i32 { return 100 as i32 };
+    public sender: string;
+    public text: string;
+
+    constructor(_sender: string, _text: string){
+       this.sender=_sender;
+       this.text=_text||"";
+    }
+ }
