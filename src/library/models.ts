@@ -1,93 +1,65 @@
-import { context ,PersistentMap, u128,PersistentVector, PersistentUnorderedMap, Context } from "near-sdk-core";
+import { PersistentUnorderedMap	, PersistentVector } from "near-sdk-core";
 
-type AccountId = string;
 type Address = string;
 
 /**
- * rate th books
- * 
- */
- export enum RateEnum {
-    bad,
-    regular,
-    awesome,
-    none,
-  }
-
-  @nearBindgen
-  export class BookInformation{
-    id:u64;
-    owner: string;
-    isbn:string;
-    name:string;
-    description:string;
-    numpage:u64;
-    author:string;
-    datepublished:string;
-    editions:u64;
-    rates:PersistentVector<Rate>;
-    comments:PersistentMap<AccountId,string>;
-    timestamp: u64;
-    /**
-     * @param isbn is the international standard book number
-     * @param rate is the book's qualification
-     * @param comments is the list of comments made by the users
-     */
-    constructor(
-        id:u64,
-        owner:string,
-        isbn:string,
-        name:string,
-        description:string,
-        numpage:u64,
-        author:string,
-        datepublished:string,
-        editions:u64,
-        timestamp: u64,
-        ){
-           this.id=id;
-           this.owner=context.sender;
-           this.isbn=isbn;
-           this.name=name;
-           this.description=description;
-           this.numpage=numpage;
-           this.author=author;
-           this.rates= new PersistentVector<Rate>("rating");
-           this.comments = new PersistentMap<AccountId,string>("v");
-           this.comments.set(owner,"no comments yet")
-           this.datepublished=datepublished;
-           this.editions=editions; 
-           this.timestamp=timestamp;
-        }
-        
-
-  }
-   export class Rate{
-      owner:string;
-      rate:RateEnum;
-      constructor(
-         _owner:string,
-         _rate:RateEnum
-      ){
-         this.owner=_owner;
-         this.rate=_rate;
-      }
-   }
-   
-  export let Books = new PersistentVector<BookInformation>("Books")
-  export let rateL = new PersistentMap<AccountId, u32>("rate")
-
-  /**
- * A message left by someone saying thanks
+ * A message sent to another account
  */
  @nearBindgen
  export class Message {
-   //public static max_length(): i32 { return 100 as i32 };
-    public sender: string;
+    public sender: Address;
     public text: string;
 
-    constructor(_sender: string, _text: string){
+    constructor(_sender: Address, _text: string){
        this.sender=_sender;
-       this.text=_text||"";
+       this.text=_text;
     }
  }
+
+ @nearBindgen
+ export class User_Profile {
+   private userName:string;
+   private publicDescription:string;
+   private age:i16;
+   private messages: PersistentVector<Message>;
+
+   constructor(_userName?:string, _publicDescription?:string, _age?:i16){
+      this.messages=new PersistentVector<Message>("msg");
+      this.userName=_userName?_userName:"";
+      this.publicDescription=_publicDescription?_publicDescription:"";
+      this.age=_age?_age:-1;
+   }
+
+   public getUserName():string{
+      return this.userName;
+   }
+
+   public setUserName(_userName:string):void{
+      this.userName=_userName;
+   }
+
+   public getPublicDescription():string{
+      return this.publicDescription;
+   }
+   public setPublicDescription(_publicDescription:string):void{
+      this.publicDescription=_publicDescription;
+   }
+   public getAge():i16{
+      return this.age;
+   }
+
+   public setAge(_age:i16):void{
+      this.age=_age;
+   }
+   public addMessage(message: Message):number{
+      this.messages.push(message);
+      return this.messages.length
+   }
+   public getMessages():PersistentVector<Message>{
+      return this.messages;
+   }
+
+ }
+
+
+export let profiles: PersistentUnorderedMap	<string, User_Profile>=new PersistentUnorderedMap	<string, User_Profile>("prfl");
