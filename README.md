@@ -1,4 +1,4 @@
-# `DA_FACEBOOK` Starter Kit
+# `DA_FACEBOOK`
 
 # 📄 Introduction
 
