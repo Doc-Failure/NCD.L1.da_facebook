@@ -2,6 +2,15 @@ import { PersistentUnorderedMap	, PersistentVector } from "near-sdk-core";
 
 type Address = string;
 
+/*State can be: 
+0: Off - In Test
+1: On - In Production
+*/
+export enum State{
+   off,
+   on
+}
+
 /**
  * A message sent to another account
  */
@@ -51,9 +60,8 @@ type Address = string;
    public setAge(_age:i16):void{
       this.age=_age;
    }
-   public addMessage(message: Message):number{
+   public addMessage(message: Message):void{
       this.messages.push(message);
-      return this.messages.length
    }
    public getMessages():PersistentVector<Message>{
       return this.messages;
