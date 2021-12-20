@@ -11,7 +11,7 @@
     "asp": "asp --verbose --nologo"
   },
   "keywords": [],
-  "author": "jcanalesn9@gmail.com,dokxo96@gmail.com",
+  "author": "stefano.convertino@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "near-sdk-as": "^3.1.0"
