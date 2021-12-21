@@ -27,12 +27,14 @@ export enum State{
 
  @nearBindgen
  export class User_Profile {
+   private profileId: string;
    private userName:string;
    private publicDescription:string;
    private age:i16;
    private messages: PersistentVector<Message>;
 
-   constructor(_userName?:string, _publicDescription?:string, _age?:i16){
+   constructor(_profileId:string, _userName?:string, _publicDescription?:string, _age?:i16){
+      this.profileId=_profileId;
       this.messages=new PersistentVector<Message>("msg");
       this.userName=_userName?_userName:"";
       this.publicDescription=_publicDescription?_publicDescription:"";

@@ -1,5 +1,5 @@
 import {Context, storage} from "near-sdk-as"
-import {profiles, Message, User_Profile, State} from "../models"
+import {profiles, Message, User_Profile} from "../models"
 
 
 const MAX_DESCRIPTION_LENGTH :i32 =255;
@@ -26,7 +26,7 @@ export function createProfile(_userName:string, _age:i16, _publicDescription?:st
   assert(!profiles.contains(profileId), "Profile already exist!");
   assert(_userName.length>0, "Username is mandatory");
   assert(_age>14, "Age must be greater than 14");
-  profiles.set(profileId,new User_Profile(_userName, _publicDescription, _age));
+  profiles.set(profileId,new User_Profile(profileId, _userName, _publicDescription, _age));
     
   return "profile created";
 }
