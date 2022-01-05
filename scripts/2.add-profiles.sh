@@ -30,7 +30,7 @@ echo
 echo --------------------------------------------------------------------
 echo "Step 2: Let's show all the saved profiles"
 echo ---------------------------------------------------------
-near call $CONTRACT getProfiles --account-id $USER_ACCOUNT 
+near view $CONTRACT getProfiles
 
 echo
 exit 0

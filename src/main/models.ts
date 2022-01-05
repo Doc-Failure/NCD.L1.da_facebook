@@ -35,7 +35,7 @@ export enum State{
 
    constructor(_profileId:string, _userName?:string, _publicDescription?:string, _age?:i16){
       this.profileId=_profileId;
-      this.messages=new PersistentVector<Message>("msg");
+      this.messages=new PersistentVector<Message>("msg"+_profileId);
       this.userName=_userName?_userName:"";
       this.publicDescription=_publicDescription?_publicDescription:"";
       this.age=_age?_age:-1;
