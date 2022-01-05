@@ -27,7 +27,7 @@ echo
 echo --------------------------------------------------------------------
 echo "Step 2: all the saved profiles"
 echo ---------------------------------------------------------
-near call $CONTRACT getMessage '{"receiver": "address-'$PROFILE_ID'"}' --account-id $USER_ACCOUNT
+near call $CONTRACT getMessages '{"receiver": "address-'$PROFILE_ID'"}' --account-id $USER_ACCOUNT
 
 echo
 exit 0

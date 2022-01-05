@@ -23,7 +23,7 @@ echo --------------------------------------------------------------------
 echo "Step 1: Add a new Profile"
 echo ---------------------------------------------------------
 
-near call $CONTRACT createProfile '{"_userName": "Micky Mouse","_age":16,"_publicDescription":"string","_profileId":"address-'$RANDOM'"}' --account-id $USER_ACCOUNT
+near call $CONTRACT createProfile '{"_userName": "Micky Mouse","_age":16,"_publicDescription":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!","_profileId":"address-'$RANDOM'"}' --account-id $USER_ACCOUNT
 
 echo
 echo

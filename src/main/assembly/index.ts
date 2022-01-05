@@ -6,7 +6,7 @@ const MAX_DESCRIPTION_LENGTH :i32 =255;
 const MAX_BOOKPAGE_LENGTH :u64 =1200;
 
 //I used this flag just for educational purpose
-storage.set("isProduction", false);
+//storage.set("isProduction", false);
 
 export function setProduction(_isProduction: bool): void{
   storage.set("isProduction", _isProduction);
